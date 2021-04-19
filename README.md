@@ -1,6 +1,6 @@
 # GcfRuby
 
-This gem allows interaction within ruby code with various apis hosted in google cloud functions.
+This gem allows interaction within ruby code with various APIs hosted in google cloud functions.
 
 ## Installation
 
@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After installing the gem, complete the file in  `config/initializers/gcf_ruby.rb` with required api_url and api_bearer values.
+
+Two methods are available (as of 19/04/2021) : `predict` and `predict_async` which requires a webhook_url on which the response will be sent. 
 
 ## Development
 
@@ -30,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/gcf_ruby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Flatlooker/gcf_ruby.
 
 
 ## License
