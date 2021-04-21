@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dummy.cloudfunctions.net/interface?model=classification_diags&url=https://www.webhookdummyurl.com
+    body:
+      encoding: UTF-8
+      string: '{"instances":[{"url":"https://test.pdf","doc_id":1}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - europe-west1-flatlooker-bigquery.cloudfunctions.net
+      Authorization:
+      - Bearer fake
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Content-Type:
+      - application/json
+      Function-Execution-Id:
+      - qlmoqp6tu2nu
+      X-Cloud-Trace-Context:
+      - 02ab7582fd8f9f16903bb6870ee6d67e;o=1
+      Date:
+      - Tue, 20 Apr 2021 08:37:54 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '16'
+      Alt-Svc:
+      - h3-29=":443"; ma=2592000,h3-T051=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: UTF-8
+      string: '{"status":"OK"}
+
+        '
+  recorded_at: Tue, 20 Apr 2021 08:37:53 GMT
+recorded_with: VCR 6.0.0

@@ -1,6 +1,6 @@
 # GcfRuby : simple predictions with google cloud functions
 
-This gem allows interaction within ruby code with various APIs hosted in google cloud functions. It is primarly designed to predict results of machine learning models and works synchronously (for light predictions) or asynchronously (for heavier predictions). 
+This gem allows interaction within ruby code with various APIs hosted in google cloud functions. It is primarly designed to predict results of machine learning models and works synchronously (for light predictions) or asynchronously (for heavier predictions).
 
 ## Installation
 
@@ -20,12 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-After installing the gem, complete the file in  `config/initializers/gcf_ruby.rb` with required `api_url` (for webhooks) and `api_bearer` for authentication.
+After installing the gem, complete the file in  `config/initializers/gcf_ruby.rb` with required `api_url` and `api_bearer` for authentication.
 
-Two methods are available (as of 19/04/2021) : 
+Here is what the file should look like :
 
-- `predict(model_name, params)` which returns synchronously the result of the model with the corresponding model_name.
-- `predict_async` which returns asynchronously the result of the model. It requires a webhook url (set in `api_url`) on which the response will be sent.
+```ruby
+GcfRuby.configure do |config|
+  config.api_url = 'https://dummy.cloudfunctions.net/interface'
+  config.api_bearer = 'fake_bearer'
+end
+```
+
+Two methods are available (as of 19/04/2021) :
+
+- `GcfRuby.predict(model_name, params)` which returns synchronously the result of the model with the corresponding model_name.
+- `GcfRuby.predict_async(model_name, params, webhook_url)` which returns asynchronously the result of the model. It requires a webhook url on which the response will be sent.
 
 ## Development
 
