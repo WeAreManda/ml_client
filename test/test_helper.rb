@@ -7,7 +7,7 @@ require 'minitest/autorun'
 require 'vcr'
 
 GcfRuby.configure do |config|
-  config.api_url = 'https://europe-west1-flatlooker-bigquery.cloudfunctions.net/interface'
+  config.api_url = 'https://dummy.cloudfunctions.net/interface'
   config.api_bearer = 'fake_bearer'
 end
 
