@@ -31,6 +31,10 @@ module MLClient
   class InternalServerError < MLClient
   end
 
+  # in case of configuration errors
+  class ConfigurationError < MLClient
+  end
+
   # in case of other errors
   class UnhandledError < MLClient
   end

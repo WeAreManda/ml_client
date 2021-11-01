@@ -13,12 +13,16 @@ module MLClient
   class << self
     attr_accessor :configuration
 
-    def predict(model_name, params)
-      post(model_name, formatted_params(params))
+    def predict(model_name, instances, url: api_url, endpoint: nil)
+      endpoint ||= 'predict'
+      query_strings = { model: model_name }
+      post(url, endpoint, query_strings, formatted_instances(instances))
     end
 
-    def predict_async(model_name, params, webhook_url)
-      post(model_name, formatted_params(params), webhook_url)
+    def predict_async(model_name, instances, url: api_url, endpoint: nil, webhook_url: nil)
+      endpoint ||= 'predict_async'
+      query_strings = { model: model_name, webhook_url: webhook_url }
+      post(url, endpoint, query_strings, formatted_instances(instances))
     end
 
     def configure
@@ -26,21 +30,26 @@ module MLClient
       yield configuration
     end
 
+    def api_url
+      configuration&.api_url
+    end
+
     private
 
-    def post(model_name, params, url = nil)
-      uri = URI.parse(self.configuration.api_url)
-      query_params = { model: model_name }
-      query_params[:url] = url if url
-      uri.query = URI.encode_www_form(query_params)
+    def post(url, endpoint, query_strings, payload)
+      raise ConfigurationError, 'Missing url' if url.nil?
+
+      uri = URI.join(url, endpoint || '')
+      uri.query = URI.encode_www_form(query_strings)
 
       req = Net::HTTP::Post.new(uri)
-      req['Authorization'] = "Bearer #{self.configuration.api_bearer}"
+      req['Authorization'] = "Bearer #{configuration.api_bearer}" if configuration&.api_bearer
       req['Content-Type'] = 'application/json'
 
-      req.body =  params.to_json
+      req.body = payload.to_json
       generate_https = Net::HTTP.new(uri.host, uri.port)
       generate_https.use_ssl = true
+      generate_https.set_debug_output($stdout) if configuration&.debug
 
       res = generate_https.request(req)
       response = JSON.parse(res.body)
@@ -67,7 +76,7 @@ module MLClient
       end
     end
 
-    def formatted_params(params)
+    def formatted_instances(params)
       { instances: params }
     end
   end
@@ -76,10 +85,10 @@ module MLClient
   class Configuration
     attr_accessor :api_url
     attr_accessor :api_bearer
+    attr_accessor :debug
 
     def initialize
-      @api_url = 'default option'
-      @api_bearer = 'default option'
+      @debug = false
     end
   end
 end
