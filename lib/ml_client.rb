@@ -21,7 +21,7 @@ module MLClient
       post(model_name, formatted_params(params), webhook_url)
     end
 
-    def configure(&block)
+    def configure
       self.configuration ||= Configuration.new
       yield configuration
     end
@@ -60,11 +60,10 @@ module MLClient
         # it's sync
         response
       when '202'
-        # it's ansync
+        # it's async
         true
       else
         raise UnhandledError, 'Cannot process error code'
-        false
       end
     end
 
@@ -73,6 +72,7 @@ module MLClient
     end
   end
 
+  # Configuration for client
   class Configuration
     attr_accessor :api_url
     attr_accessor :api_bearer

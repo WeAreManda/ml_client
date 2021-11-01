@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'This gem is a thin client for MLServer'
   spec.homepage      = 'https://github.com/Flatlooker/ml_client'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
   spec.add_development_dependency 'minitest', '>= 5.14'
   spec.add_development_dependency 'vcr', '~> 6.0'
   spec.add_development_dependency 'webmock', '~> 3.12'

@@ -7,6 +7,7 @@ module MLClient
 
     def initialize(message = nil)
       @message = message
+      super
     end
   end
 
