@@ -1,4 +1,4 @@
-# GcfRuby : simple predictions with google cloud functions
+# MLClient : simple predictions with google cloud functions
 
 This gem allows interaction within ruby code with various APIs hosted in google cloud functions. It is primarly designed to predict results of machine learning models and works synchronously (for light predictions) or asynchronously (for heavier predictions).
 
@@ -7,7 +7,7 @@ This gem allows interaction within ruby code with various APIs hosted in google 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'gcf_ruby'
+gem 'ml_client'
 ```
 
 And then execute:
@@ -16,25 +16,25 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install gcf_ruby
+    $ gem install ml_client
 
 ## Usage
 
-After installing the gem, complete the file in  `config/initializers/gcf_ruby.rb` with required `api_url` and `api_bearer` for authentication.
+After installing the gem, complete the file in  `config/initializers/ml_client.rb` with required `api_url` and `api_bearer` for authentication.
 
 Here is what the file should look like :
 
 ```ruby
-GcfRuby.configure do |config|
-  config.api_url = 'https://dummy.cloudfunctions.net/interface'
+MLClient.configure do |config|
+  config.api_url = 'https://api.com/'
   config.api_bearer = 'fake_bearer'
 end
 ```
 
-Two methods are available (as of 19/04/2021) :
+Two methods are available (as of 01/11/2021) :
 
-- `GcfRuby.predict(model_name, params)` which returns synchronously the result of the model with the corresponding model_name.
-- `GcfRuby.predict_async(model_name, params, webhook_url)` which returns asynchronously the result of the model. It requires a webhook url on which the response will be sent.
+- `MLClient.predict(model_name, params)` which returns synchronously the result of the model with the corresponding model_name.
+- `MLClient.predict_async(model_name, params, webhook_url)` which returns asynchronously the result of the model. It requires a webhook url on which the response will be sent.
 
 ## Development
 
@@ -44,7 +44,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Flatlooker/gcf_ruby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Flatlooker/ml_client.
 
 ## License
 

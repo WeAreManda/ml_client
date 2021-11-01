@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require_relative 'lib/gcf_ruby/version'
+require_relative 'lib/ml_client/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'gcf_ruby'
-  spec.version       = GcfRuby::VERSION
+  spec.name          = 'ml_client'
+  spec.version       = MLClient::VERSION
   spec.authors       = ['Nicolas Goyet']
   spec.email         = ['nicolas@flatlooker.com']
 
-  spec.summary       = 'This gem allows interaction within ruby code with various apis hosted in google cloud functions. Full list of available APIs here : https://github.com/Flatlooker/google_cloud_functions.'
-  spec.homepage      = 'https://github.com/Flatlooker/gcf_ruby'
+  spec.summary       = 'This gem is a thin client for MLServer'
+  spec.homepage      = 'https://github.com/Flatlooker/ml_client'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
   spec.add_development_dependency 'minitest', '>= 5.14'
   spec.add_development_dependency 'vcr', '~> 6.0'
   spec.add_development_dependency 'webmock', '~> 3.12'
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/Flatlooker/gcf_ruby'
+  spec.metadata['source_code_uri'] = 'https://github.com/Flatlooker/ml_client'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

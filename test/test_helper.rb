@@ -2,11 +2,11 @@
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __dir__)
 
-require 'gcf_ruby'
+require 'ml_client'
 require 'minitest/autorun'
 require 'vcr'
 
-GcfRuby.configure do |config|
+MLClient.configure do |config|
   config.api_url = 'https://dummy.cloudfunctions.net/interface'
   config.api_bearer = 'fake_bearer'
 end

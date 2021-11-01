@@ -5,11 +5,11 @@ require 'json'
 require 'net/http'
 
 # Resource and support classes
-require 'gcf_ruby/version'
-require 'gcf_ruby/errors'
+require 'ml_client/version'
+require 'ml_client/errors'
 
 # Main class for prediction
-module GcfRuby
+module MLClient
   class << self
     attr_accessor :configuration
 
@@ -21,16 +21,21 @@ module GcfRuby
       post(model_name, formatted_params(params), webhook_url)
     end
 
+    def configure(&block)
+      self.configuration ||= Configuration.new
+      yield configuration
+    end
+
     private
 
     def post(model_name, params, url = nil)
-      uri = URI.parse(GcfRuby.configuration.api_url)
+      uri = URI.parse(self.configuration.api_url)
       query_params = { model: model_name }
       query_params[:url] = url if url
       uri.query = URI.encode_www_form(query_params)
 
       req = Net::HTTP::Post.new(uri)
-      req['Authorization'] = "Bearer #{GcfRuby.configuration.api_bearer}"
+      req['Authorization'] = "Bearer #{self.configuration.api_bearer}"
       req['Content-Type'] = 'application/json'
 
       req.body =  params.to_json
@@ -66,11 +71,6 @@ module GcfRuby
     def formatted_params(params)
       { instances: params }
     end
-  end
-
-  def self.configure(&block)
-    self.configuration ||= Configuration.new
-    yield configuration
   end
 
   class Configuration
