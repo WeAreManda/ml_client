@@ -48,7 +48,7 @@ module MLClient
 
       req.body = payload.to_json
       generate_https = Net::HTTP.new(uri.host, uri.port)
-      generate_https.use_ssl = true
+      generate_https.use_ssl = true if uri.scheme == 'https'
       generate_https.set_debug_output($stdout) if configuration&.debug
 
       res = generate_https.request(req)
