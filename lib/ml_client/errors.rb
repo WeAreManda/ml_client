@@ -2,7 +2,7 @@
 
 module MLClient
   # MLClient is the base error from which all other more specific errors
-  class MLClient < StandardError
+  class MLClientError < StandardError
     attr_accessor :message
 
     def initialize(message = nil)
@@ -12,30 +12,30 @@ module MLClient
   end
 
   # in case of 400
-  class FailedValidationError < MLClient
+  class FailedValidationError < MLClientError
   end
 
   # in case of 403
-  class AuthentificationError < MLClient
+  class AuthentificationError < MLClientError
   end
 
   # in case of 404
-  class WrongModelName < MLClient
+  class WrongModelName < MLClientError
   end
 
   # in case of 405
-  class AsyncError < MLClient
+  class AsyncError < MLClientError
   end
 
   # in case of 500
-  class InternalServerError < MLClient
+  class InternalServerError < MLClientError
   end
 
   # in case of configuration errors
-  class ConfigurationError < MLClient
+  class ConfigurationError < MLClientError
   end
 
   # in case of other errors
-  class UnhandledError < MLClient
+  class UnhandledError < MLClientError
   end
 end
