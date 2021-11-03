@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://dummy.cloudfunctions.net/interface?model=classification_diags&url=https://www.webhookdummyurl.com
+    uri: https://dummy.cloudfunctions.net/predict_async?model=classification_diags&webhook_url=https://www.webhookdummyurl.com
     body:
       encoding: UTF-8
       string: '{"instances":[{"url":"https://test.pdf","doc_id":1}]}'
