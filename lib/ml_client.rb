@@ -39,6 +39,9 @@ module MLClient
     def post(url, endpoint, query_strings, payload)
       raise ConfigurationError, 'Missing url' if url.nil?
 
+      model_name = query_strings[:model]
+      params = payload[:instances]
+
       uri = URI.join(url, endpoint || '')
       uri.query = URI.encode_www_form(query_strings)
 
