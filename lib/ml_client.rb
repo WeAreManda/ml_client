@@ -39,6 +39,9 @@ module MLClient
     def post(url, endpoint, query_strings, payload)
       raise ConfigurationError, 'Missing url' if url.nil?
 
+      model_name = query_strings[:model]
+      params = payload[:instances]
+
       uri = URI.join(url, endpoint || '')
       uri.query = URI.encode_www_form(query_strings)
 
@@ -56,13 +59,13 @@ module MLClient
 
       case res.code
       when '400'
-        raise FailedValidationError, "Wrong inputs #{payload[:instances]} in model #{query_strings[:model]}"
+        raise FailedValidationError, "Wrong inputs #{params} in model #{model_name}"
       when '403'
         raise AuthentificationError, 'Authorization error'
       when '404'
-        raise WrongModelName, "Wrong model name #{query_strings[:model]}"
+        raise WrongModelName, "Wrong model name #{model_name}"
       when '405'
-        raise AsyncError, "#{query_strings[:model]} should be called in an asynchronous manner"
+        raise AsyncError, "#{model_name} should be called in an asynchronous manner"
       when '500'
         raise InternalServerError, 'Internal server error in api'
       when '200'
